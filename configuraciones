@@ -1,0 +1,4 @@
+npm install --save react-fontawesome
+npm install --save font-awesome
+
+Para poder usar font-awesome con react he tenido que instalar ambos paquetes e importar el css en el index.js
