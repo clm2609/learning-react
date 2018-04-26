@@ -26,6 +26,7 @@ class Header extends Component {
         this.toggle = this.toggle.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.getSearchUrl = this.getSearchUrl.bind(this);
+        this.submit = this.submit.bind(this);
         this.state = {
             isOpen: false,
             searchBar: '',
@@ -44,24 +45,22 @@ class Header extends Component {
         const url = "/search?search="
         return url + encodeURI(this.state.searchBar)
     }
-    _handleKeyPress = (e) => {
-        if (e.key === 'Enter') {
-            console.log("pressed")
-            this.props.history.push("/")
-        }
+    submit(e) {
+        e.preventDefault(); 
+        window.location= "http://"+window.location.hostname+":"+window.location.port+this.getSearchUrl()
     }
     render() {
         return (
             <div>
                 <Navbar color="dark" className="navbar-dark" light expand="md">
-                    <NavbarBrand tag={Link} to="/">Itunes Thing</NavbarBrand>
+                    <NavbarBrand tag={Link} to="/">React Thing</NavbarBrand>
                     <NavbarToggler onClick={this.toggle} />
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="ml-auto" navbar>
                             <NavItem>
-                                <Form inline>
+                                <Form inline onSubmit={this.submit} >
                                     <FormGroup>
-                                        <Input placeholder="Search iTunes" onKeyPress={this._handleKeyPress} value={this.state.searchBar} onChange={this.handleChange} />
+                                        <Input placeholder="Search iTunes" value={this.state.searchBar} onChange={this.handleChange} />
                                         <Button href={this.getSearchUrl()} color="secondary">Search</Button>
                                         {/* <Link to={this.getSearchUrl()}>
                                             <Button outline color="primary">Search</Button>
@@ -70,7 +69,7 @@ class Header extends Component {
                                 </Form>
                             </NavItem>
                             <NavItem>
-                                <NavLink tag={Link} to="/RHCP">RHCP</NavLink>
+                                <NavLink tag={Link} to="/tictactoe">TicTacToe</NavLink>
                             </NavItem>
                             <NavItem>
                                 <NavLink href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>
