@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { TrackResult, ArtistResult } from './Results';
 import ScrollButton from './ScrollButton';
 import {
-    Container, Col, Row, Button
+    Container, Col, Row, Button, Alert
 } from 'reactstrap';
 var hash = require('object-hash');
 class Search extends Component {
@@ -10,19 +10,26 @@ class Search extends Component {
         super(props);
         this.showMore = this.showMore.bind(this);
         this.showLess = this.showLess.bind(this);
+        this.componentDidMount = this.componentDidMount.bind(this);
+        this.search = this.search.bind(this);
 
         this.state = {
             searchResults: [],
             numResults: 20,
-            showedResults: [[]]
+            showedResults: [[]],
+            searchDone: false
         };
     }
     componentDidMount() {
+        this.search()
+    }
+
+    search() {
         var query = this.getUrlParams(this.props.location.search);
         fetch('https://itunes.apple.com/search?term=' + query.search + '&limit=200').then((response) => {
             return response.json()
         }).then((recurso) => {
-            this.setState({ searchResults: recurso.results }, () => (this.showableResults()))
+            this.setState({ searchResults: recurso.results, searchDone: true }, () => (this.showableResults()))
 
         })
     }
@@ -30,7 +37,7 @@ class Search extends Component {
     showableResults() {
         var results = this.state.searchResults
         var transformed = []
-        var len = this.state.numResults
+        var len = Math.min(this.state.numResults, results.length)
         var tam = Math.ceil(len / 4)
         for (var i = 0; i < tam; i++) {
             var aux = []
@@ -51,18 +58,16 @@ class Search extends Component {
         }, {})
     }
     showMore() {
-        if (this.state.numResults < 200) {
-            this.setState((prevState, props) => ({
-                numResults: prevState.numResults + 20
-            }),()=>(this.showableResults()));
-        }
+        this.setState((prevState, props) => ({
+            numResults: prevState.numResults + 20
+        }), () => (this.showableResults()));
+
     }
     showLess() {
-        if (this.state.numResults > 20) {
-            this.setState((prevState, props) => ({
-                numResults: prevState.numResults - 20
-            }),()=>(this.showableResults()));
-        }
+        this.setState((prevState, props) => ({
+            numResults: prevState.numResults - 20
+        }), () => (this.showableResults()));
+
     }
 
     render() {
@@ -72,11 +77,29 @@ class Search extends Component {
         const marginButton = {
             marginBottom: '1rem'
         }
+        const noResults = () => {
+            if (this.state.searchResults.length === 0) {
+                return (
+                    this.state.searchDone && <Alert color="danger" className="noresultalert">La busqueda {this.getUrlParams(this.props.location.search).search} no obtuvo resultados </Alert>
+                )
+            }
+        }
+        const buttonMore = () => {
+            if (this.state.numResults < Math.min(200, this.state.searchResults.length)) {
+
+                return <Button onClick={this.showMore}>Mostrar mas</Button>
+            }
+        }
+        const buttonLess = () => {
+            if (this.state.numResults > 20) {
+                return <Button onClick={this.showLess}>Mostrar menos</Button>
+
+            }
+        }
         return (
             <div>
                 <Container>
                     {
-
                         this.state.showedResults.map(p => (
                             <Row style={marginRow} className="table" key={hash(p)}>
                                 {p.map(o => (
@@ -92,19 +115,22 @@ class Search extends Component {
                             </Row>
                         ))
                     }
+                    {
+                        noResults()
+                    }
                     <Row style={marginRow}>
                         <Col sm="3"> </Col>
                         <Col sm="3" style={marginButton}>
-                            <Button onClick={this.showMore}>Mostrar mas</Button>
+                            {buttonMore()}
                         </Col>
                         <Col sm="3" style={marginButton}>
-                            <Button onClick={this.showLess}>Mostrar menos</Button>
+                            {buttonLess()}
                         </Col>
                         <Col sm="3"> </Col>
 
                     </Row>
                 </Container>
-                <ScrollButton scrollStepInPx="50" delayInMs="16.66"/>
+                <ScrollButton/>
 
             </div>
         );

@@ -6,7 +6,6 @@ import Game from './Game'
 import Search from './Search'
 
 class Main extends Component {
-    
     render() {
 
         return (
@@ -14,8 +13,8 @@ class Main extends Component {
                 <Switch>
                     <Route exact path='/' component={Home} />
                     <Route path='/tictactoe' component={Game} />
-                    <Route path='/search' component={Search} />
-
+                    <Route path='/search'  component={Search} />
+          
                 </Switch>
             </main>
         );
