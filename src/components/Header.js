@@ -18,6 +18,7 @@ import {
     Form,
     Button
 } from 'reactstrap';
+import { withRouter } from 'react-router-dom'
 
 class Header extends Component {
     constructor(props) {
@@ -47,8 +48,10 @@ class Header extends Component {
     }
     submit(e) {
         e.preventDefault(); 
-        window.location= "http://"+window.location.hostname+":"+window.location.port+this.getSearchUrl()
+        // window.location= "http://"+window.location.hostname+":"+window.location.port+this.getSearchUrl()
+        withRouter(({ history }) => (history.push('/new-location')))
     }
+
     render() {
         return (
             <div>
@@ -61,10 +64,9 @@ class Header extends Component {
                                 <Form inline onSubmit={this.submit} >
                                     <FormGroup>
                                         <Input placeholder="Search iTunes" value={this.state.searchBar} onChange={this.handleChange} />
-                                        <Button href={this.getSearchUrl()} color="secondary">Search</Button>
-                                        {/* <Link to={this.getSearchUrl()}>
+                                        <Link to={this.getSearchUrl()}>
                                             <Button outline color="primary">Search</Button>
-                                        </Link> */}
+                                        </Link>
                                     </FormGroup>
                                 </Form>
                             </NavItem>

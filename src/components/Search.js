@@ -24,9 +24,14 @@ class Search extends Component {
         this.search()
     }
 
+    componentWillReceiveProps(){
+        this.search()
+    }
+    
+
     search() {
-        var query = this.getUrlParams(this.props.location.search);
-        fetch('https://itunes.apple.com/search?term=' + query.search + '&limit=200').then((response) => {
+        var query = this.props.search
+        fetch('https://itunes.apple.com/search?term=' + query + '&limit=200').then((response) => {
             return response.json()
         }).then((recurso) => {
             this.setState({ searchResults: recurso.results, searchDone: true }, () => (this.showableResults()))
