@@ -10,8 +10,9 @@ class Search extends Component {
         super(props);
         this.showMore = this.showMore.bind(this);
         this.showLess = this.showLess.bind(this);
-        this.componentDidMount = this.componentDidMount.bind(this);
         this.search = this.search.bind(this);
+        this.componentDidMount = this.search;
+        this.componentWillReceiveProps = this.search;
 
         this.state = {
             searchResults: [],
@@ -20,15 +21,6 @@ class Search extends Component {
             searchDone: false
         };
     }
-    componentDidMount() {
-        this.search()
-    }
-
-    componentWillReceiveProps(){
-        this.search()
-    }
-    
-
     search() {
         var query = this.props.search
         fetch('https://itunes.apple.com/search?term=' + query + '&limit=200').then((response) => {

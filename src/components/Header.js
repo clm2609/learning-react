@@ -18,8 +18,6 @@ import {
     Form,
     Button
 } from 'reactstrap';
-import { withRouter } from 'react-router-dom'
-
 class Header extends Component {
     constructor(props) {
         super(props);
@@ -48,8 +46,8 @@ class Header extends Component {
     }
     submit(e) {
         e.preventDefault(); 
-        // window.location= "http://"+window.location.hostname+":"+window.location.port+this.getSearchUrl()
-        withRouter(({ history }) => (history.push('/new-location')))
+        //window.location= "http://"+window.location.hostname+":"+window.location.port+this.getSearchUrl()
+        
     }
 
     render() {
