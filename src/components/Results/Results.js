@@ -3,7 +3,7 @@ import {
     Card, CardImg, CardText, CardBody,
     CardTitle, CardSubtitle, Button, CardHeader, CardFooter
 } from 'reactstrap';
-
+import './Results.css'
 class TrackResult extends Component {
     constructor(props) {
         super(props);

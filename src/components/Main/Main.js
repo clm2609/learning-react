@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom'
-import './App.css';
-import Home from './Home'
-import Game from './Game'
-import Search from './Search'
+import Home from '../Home/Home'
+import Game from '../Game/Game'
+import Search from '../../containers/Search/Search'
 
 class Main extends Component {
     getParameterByName(name, url) {
@@ -25,7 +24,6 @@ class Main extends Component {
               location={location}
               render={(props) => <Component {...props} {...rest} />}/>
           )
-        console.log(this.getParameterByName("search"))
         return (
             <main>
                 <Switch>

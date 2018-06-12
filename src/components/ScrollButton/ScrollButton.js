@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import './ScrollButton.css'
+
 var FontAwesome = require('react-fontawesome');
 
 class ScrollButton extends Component {

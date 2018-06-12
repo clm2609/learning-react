@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './App.css';
 import { Link } from 'react-router-dom'
 import {
     Collapse,
@@ -18,6 +17,7 @@ import {
     Form,
     Button
 } from 'reactstrap';
+import'./Header.css'
 class Header extends Component {
     constructor(props) {
         super(props);
@@ -60,7 +60,7 @@ class Header extends Component {
                         <Nav className="ml-auto" navbar>
                             <NavItem>
                                 <Form inline onSubmit={this.submit} >
-                                    <FormGroup>
+                                    <FormGroup className="searchForm">
                                         <Input placeholder="Search iTunes" value={this.state.searchBar} onChange={this.handleChange} />
                                         <Link to={this.getSearchUrl()}>
                                             <Button outline color="primary">Search</Button>

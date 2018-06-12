@@ -1,0 +1,14 @@
+.table{
+    display: table;
+    margin: 0;
+}
+.cell{
+    display: table-cell;
+    margin-top: 1rem;
+
+}
+.showMoreSearchButtons{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+
+}
