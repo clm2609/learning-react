@@ -6,10 +6,10 @@ import {
 } from 'reactstrap';
 import './Search.css'
 import { connect } from 'react-redux';
-import { fetchSearchResults,showMoreResults,showLessResults} from '../../store/search/actions';
+import { fetchSearchResults, showMoreResults, showLessResults } from '../../store/search/actions';
 import * as searchSelectors from '../../store/search/reducer';
 
-var hash = require('object-hash');
+//var hash = require('object-hash');
 class Search extends Component {
     constructor(props) {
         super(props);
@@ -44,7 +44,6 @@ class Search extends Component {
         }
         const buttonMore = () => {
             if (this.props.numResults < Math.min(200, this.props.searchResults.length)) {
-
                 return <Button onClick={this.showMore}>Mostrar mas</Button>
             }
         }
@@ -57,36 +56,23 @@ class Search extends Component {
         return (
             <div>
                 <Container>
-                    {
-                        this.props.showedResults.map(p => (
-                            <Row className="table" key={hash(p)}>
-                                {p.map(o => (
-                                    <Col sm="6" lg="3" className="cell" key={hash(o)}>
-                                        {o.wrapperType === 'track' &&
-                                            <TrackResult className="cell" track={o} />
-                                        }
-                                        {o.wrapperType === 'artist' &&
-                                            <ArtistResult artist={o} />
-                                        }
-                                    </Col>
-                                ))}
-                            </Row>
-                        ))
-                    }
+                    <div className="gridResults cell">
+                        {
+                            this.props.showedResults.map(p => (
+                                <div>
+                                    {p.wrapperType === 'track' && <TrackResult className="cell" track={p} />}
+                                    {p.wrapperType === 'artist' && <ArtistResult artist={p} />}
+                                </div>
+                            ))
+                        }
+                    </div>
                     {
                         noResults()
                     }
-                    <Row className="showMoreSearchButtons">
-                        <Col sm="3"> </Col>
-                        <Col sm="3">
-                            {buttonMore()}
-                        </Col>
-                        <Col sm="3">
-                            {buttonLess()}
-                        </Col>
-                        <Col sm="3"> </Col>
-
-                    </Row>
+                    <div className="gridButtons showMoreSearchButtons">
+                            <div className="buttonMore">{buttonMore()}</div>
+                            <div className="buttonLess">{buttonLess()}</div>
+                    </div>
                 </Container>
                 <ScrollButton />
 
@@ -111,10 +97,10 @@ function mapDispatchToProps(dispatch) {
         loadSearchResults(query) {
             dispatch(fetchSearchResults(query))
         },
-        showMoreResults(){
+        showMoreResults() {
             dispatch(showMoreResults())
         },
-        showLessResults(){
+        showLessResults() {
             dispatch(showLessResults())
         }
     })

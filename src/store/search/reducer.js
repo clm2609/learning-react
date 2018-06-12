@@ -8,10 +8,12 @@
 import * as types from './actionTypes';
 import Immutable from 'seamless-immutable';
 
+const BASERESULTNUM = 20
+
 const initialState = Immutable({
     searchResults: [],
-    numResults: 20,
-    showedResults: [[]],
+    numResults: BASERESULTNUM,
+    showedResults: [],
     searchDone: false
 });
 export default function reduce(state = initialState, action = {}) {
@@ -24,14 +26,14 @@ export default function reduce(state = initialState, action = {}) {
                 searchDone: true
             });
         case types.MORE_RESULTS:
-            let moreResults = state.numResults + 20
+            let moreResults = state.numResults + BASERESULTNUM
             return state.merge({
                 numResults: moreResults,
                 showedResults: showableResults(state.searchResults, moreResults),
 
             });
         case types.LESS_RESULTS:
-            let lessResults = state.numResults - 20
+            let lessResults = state.numResults - BASERESULTNUM
             return state.merge({
                 numResults: lessResults,
                 showedResults: showableResults(state.searchResults, lessResults),
@@ -58,17 +60,5 @@ export function getSearchDone(state) {
 }
 
 function showableResults(results, numResults) {
-    var transformed = []
-    var len = Math.min(numResults, results.length)
-    var tam = Math.ceil(len / 4)
-    for (var i = 0; i < tam; i++) {
-        var aux = []
-        for (var j = 0; j < 4; j++) {
-            if ((i * 4 + j) < len) {
-                aux.push(results[i * 4 + j])
-            }
-        }
-        transformed.push(aux)
-    }
-    return transformed
+    return results.slice(0,numResults)
 }
