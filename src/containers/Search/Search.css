@@ -8,29 +8,10 @@
 }
 .gridResults{
     display:grid;
-    grid-template-columns: repeat(1,1fr);
+    grid-template-columns: repeat(auto-fill,250px);
     grid-gap: 1rem;
-}
-@media (min-width:360px){
-    .gridResults{
-        display:grid;
-        grid-template-columns: repeat(2,1fr);
-        grid-gap: 1rem;
-    }
-}
-@media (min-width:766px){
-    .gridResults{
-        display:grid;
-        grid-template-columns: repeat(3,1fr);
-        grid-gap: 1rem;
-    }
-}
-@media (min-width:994px){
-    .gridResults{
-        display:grid;
-        grid-template-columns: repeat(4,1fr);
-        grid-gap: 1rem;
-    }
+    justify-content:center;
+
 }
 .gridButtons{
     display:grid;

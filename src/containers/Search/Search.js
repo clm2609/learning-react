@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import { TrackResult, ArtistResult } from '../../components/Results/Results';
 import ScrollButton from '../../components/ScrollButton/ScrollButton';
 import {
-    Container, Col, Row, Button, Alert
+    Button, Alert
 } from 'reactstrap';
 import './Search.css'
 import { connect } from 'react-redux';
 import { fetchSearchResults, showMoreResults, showLessResults } from '../../store/search/actions';
 import * as searchSelectors from '../../store/search/reducer';
 
-//var hash = require('object-hash');
+var hash = require('object-hash');
 class Search extends Component {
     constructor(props) {
         super(props);
@@ -20,6 +20,7 @@ class Search extends Component {
     }
     async search() {
         this.props.loadSearchResults(this.props.search)
+        console.log("buscando")
     }
     showMore() {
         this.props.showMoreResults()
@@ -55,11 +56,11 @@ class Search extends Component {
         }
         return (
             <div>
-                <Container>
+                <div>
                     <div className="gridResults cell">
                         {
                             this.props.showedResults.map(p => (
-                                <div>
+                                <div key={hash(p)}>
                                     {p.wrapperType === 'track' && <TrackResult className="cell" track={p} />}
                                     {p.wrapperType === 'artist' && <ArtistResult artist={p} />}
                                 </div>
@@ -73,7 +74,7 @@ class Search extends Component {
                             <div className="buttonMore">{buttonMore()}</div>
                             <div className="buttonLess">{buttonLess()}</div>
                     </div>
-                </Container>
+                </div>
                 <ScrollButton />
 
             </div>
