@@ -20,7 +20,6 @@ class Search extends Component {
     }
     async search() {
         this.props.loadSearchResults(this.props.search)
-        console.log("buscando")
     }
     showMore() {
         this.props.showMoreResults()

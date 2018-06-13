@@ -1,0 +1,11 @@
+.gridHome{
+    margin-top: 1rem;
+    display:grid;
+    /* Esto te permite tener un numero de tarjetas dependientes del tamaño de pantalla (responsivo) */
+    /* Con este las tarjetas se expanden */
+    grid-template-columns: repeat(auto-fill,minmax(200px,1fr));
+    /* Con este las tarjetas tienen un tamaño fijo de 250 */
+    /* grid-template-columns: repeat(auto-fill,200px); */
+    grid-gap: 1rem;
+    grid-auto-flow: dense;
+}

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom'
-import Home from '../Home/Home'
+import Home from '../../containers/Home/Home'
 import Game from '../Game/Game'
 import Search from '../../containers/Search/Search'
 
