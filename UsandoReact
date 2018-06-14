@@ -1,0 +1,28 @@
+A grandes rasgos para preparar el entorno usas Create React App
+https://github.com/facebookincubator/create-react-app
+Una vez usas eso se te crean las carpetas basicas
+public y src
+En src van varios subdirectorios
+components, containers, services, store
+En components tienes los componentes tontos, es decir, aquellos que solo muestran datos
+En containers tienes los componentes que se conectan a redux y que reciben datos y realizan acciones
+En services tienes el acceso a servicios, en mi ejemplo a la API de itunes
+Y en store tienes todo lo de redux
+Dentro de components y containers tienes una carpeta para cada uno con su js
+y en caso necesario un css
+ten cuidado de no usar el mismo nombre de clase de css en distintos css, por que al empaquetarlo conservan el nombre
+y se juntan todos en uno
+a no ser que hagan exactamente lo mismo en cuyo casi mejor juntarlos en un css comun mas arriba
+con respecto a los servicios no hay mucho que decir, simplemente se separa para que en caso de que cambie la forma de acceder a los datos no sea necesario modificar mas que un archivo, ya sabes, bajo acoplamiento y alta cohesion de diseño
+y finalmente, donde mas miga hay, en la store
+En esta no puedo hablarte con total certeza, pero lo que se es
+Hay una carpeta por cada container
+y un reducers.js que exporta todos los recudtores
+dentro de cada carpeta tienes los tipos de acciones como constantes
+las acciones en si
+y los reductores (en los que se incluyen los selectores)
+las acciones son las que se llama desde la vista y en mi ejemplo sirven para acceder a la api de itunes
+y para el funcionamiento de un par de botones (que modifican los datos que se muestran)
+los reductores sirven para, una vez has realizado la accion (has conseguido los datos de itunes), guardar los nuevos datos en el estado
+y finalmente, los selectores, que estan en los mismos archivos que los reductores sirven como getters
+para coger los datos del estado y mostrarlos en la vista

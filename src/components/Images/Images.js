@@ -15,28 +15,27 @@ class Images extends Component {
         return imageurl.replace("source/30x30bb.jpg", "source/500x500bb.jpg")
     }
     render() {
-        const span = ()=>{
-            var random = Math.random()*100
+        const span = () => {
+            var random = Math.random() * 100
             console.log("Working")
-            if (random<(100-SPAN2PERCENT-SPAN3PERCENT)){
+            if (random < (100 - SPAN2PERCENT - SPAN3PERCENT)) {
                 return null
-            }else if(random <(100-SPAN3PERCENT)){
+            } else if (random < (100 - SPAN3PERCENT)) {
                 return "span2"
-            }else{
+            } else {
                 return "span3"
             }
         }
         const image = this.scaleImage(this.props.track.artworkUrl30)
         if (this.props.track.kind === 'song') {
             return (
-                                        <div className={span()}>
-
-                <Card className="expand mycard">
-                    <CardImg top width="100%" src={image} alt="Card image cap" />
-                    <CardImgOverlay>
-                        <CardTitle>{this.props.track.trackName}</CardTitle>
-                    </CardImgOverlay>
-                </Card>
+                <div className={span()}>
+                    <Card className="expand mycard">
+                        <CardImg top width="100%" src={image} alt="Card image cap" />
+                        <CardImgOverlay>
+                            <CardTitle>{this.props.track.trackName}</CardTitle>
+                        </CardImgOverlay>
+                    </Card>
                 </div>
             );
         }

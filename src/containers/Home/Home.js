@@ -4,6 +4,8 @@ import { getSearchResults } from '../../store/home/reducer';
 import { connect } from 'react-redux';
 import { fetchHomePage } from '../../store/home/actions';
 import {Images} from '../../components/Images/Images'
+import ScrollButton from '../../components/ScrollButton/ScrollButton';
+
 var hash = require('object-hash');
 
 class Home extends Component {
@@ -18,6 +20,7 @@ class Home extends Component {
     render() {
         
         return (
+            <div>
             <div className="gridHome">
                 {
                     this.props.searchResults.map(p => (
@@ -25,6 +28,9 @@ class Home extends Component {
                     ))
                 }
             </div>
+            <ScrollButton />
+            </div>
+
         );
     }
 }
