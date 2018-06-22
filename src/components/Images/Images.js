@@ -19,7 +19,7 @@ class Images extends Component {
             var random = Math.random() * 100
             console.log("Working")
             if (random < (100 - SPAN2PERCENT - SPAN3PERCENT)) {
-                return null
+                return "span"
             } else if (random < (100 - SPAN3PERCENT)) {
                 return "span2"
             } else {
